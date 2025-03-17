@@ -201,7 +201,7 @@ def submit_test_results(mcq_score, subjective_evaluations, code_evaluations, ema
 
     try:
         response = requests.get(f"https://doskr.com/RESTAPI/udpatescore.php?email={email}&test_id={test_id}&mcq_score={mcq_score}&subjective_score={subjective_score}&coding_score={coding_score}")
-        st.write(response)
+        #st.write(response)
         response.raise_for_status()
         st.success("Test results submitted successfully!")
 
@@ -235,7 +235,7 @@ def camera_app():
 #     camera_app()
 
 st.title("AI-Powered MCQ, Subjective, and Coding Test")
-st.write("Click on Start Audio/Video recording first")
+st.write("Click on Start Video recording first")
 
 keywords = "Python"
 experience = "2 years"
