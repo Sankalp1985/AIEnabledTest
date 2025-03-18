@@ -201,7 +201,7 @@ def submit_test_results(mcq_score, subjective_evaluations, code_evaluations, ema
 
     try:
         response = requests.get(f"https://doskr.com/RESTAPI/udpatescore.php?email={email}&test_id={test_id}&mcq_score={mcq_score}&subjective_score={subjective_score}&coding_score={coding_score}")
-        #st.write(response)
+        st.write(response)
         response.raise_for_status()
         st.success("Test results submitted successfully!")
 
@@ -235,7 +235,7 @@ def camera_app():
 #     camera_app()
 
 st.title("AI-Powered MCQ, Subjective, and Coding Test")
-st.write("Click on Start Video recording first")
+st.write("Click on Start Audio/Video recording first")
 
 keywords = "Python"
 experience = "2 years"
@@ -293,7 +293,7 @@ with col2:
 
 with col1:
     if not st.session_state.exam_started and not st.session_state.evaluation_done:
-        #st.write(f"Current keyword: {keywords}, Experience level: {experience}")
+        st.write(f"Current keyword: {keywords}, Experience level: {experience}")
         if st.button("Start All Tests"):
             st.session_state.exam_started = True
             st.session_state.mcq_questions, st.session_state.code_questions, st.session_state.subjective_questions = question_Generate(keywords, experience)
@@ -378,14 +378,14 @@ with col1:
             for i, question in enumerate(st.session_state.mcq_questions):
                 st.subheader(f"MCQ Evaluation for Question {i + 1}:")
                 st.write(f"Question: {question['question']}")
-                #st.write(f"Correct Answer: {question['answer']}")#comment this line if yu do not wish to show the correct response
-                #st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")#comment this line if yu do not wish to show the correct response
-                st.write("-" * 20)#comment this line if yu do not wish to show the line -------------
+                st.write(f"Correct Answer: {question['answer']}")
+                st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")
+                st.write("-" * 20)
             score = calculate_score(st.session_state.mcq_answers)
             total_questions = len(st.session_state.mcq_questions)
             percentage = (score / total_questions) * 100
-            st.write(f"Your MCQ score is: {score}/{total_questions} ({percentage:.2f}%)")#comment this line if yu do not wish to show the correct response
-            st.write("-" * 20)#comment this line if you do not wish to show the line -------------
+            st.write(f"Your MCQ score is: {score}/{total_questions} ({percentage:.2f}%)")
+            st.write("-" * 20)
 
         st.subheader("Subjective Evaluations:")
         if st.session_state.subjective_questions:
@@ -394,8 +394,8 @@ with col1:
                 st.write(f"Question: {question['question']}")
                 evaluation = st.session_state.subjective_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
-                    st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show candidate response
-                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
+                    st.write(f"Score: {evaluation['score']}%")
+                    st.write(f"Feedback: {evaluation['feedback']}")
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
@@ -407,8 +407,8 @@ with col1:
                 st.write(f"Question: {question['question']}")
                 evaluation = st.session_state.code_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
-                    st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show the candidate response
-                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
+                    st.write(f"Score: {evaluation['score']}%")
+                    st.write(f"Feedback: {evaluation['feedback']}")
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
