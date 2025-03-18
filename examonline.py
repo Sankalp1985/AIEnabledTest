@@ -293,7 +293,7 @@ with col2:
 
 with col1:
     if not st.session_state.exam_started and not st.session_state.evaluation_done:
-        st.write(f"Current keyword: {keywords}, Experience level: {experience}")
+        #st.write(f"Current keyword: {keywords}, Experience level: {experience}")
         if st.button("Start All Tests"):
             st.session_state.exam_started = True
             st.session_state.mcq_questions, st.session_state.code_questions, st.session_state.subjective_questions = question_Generate(keywords, experience)
