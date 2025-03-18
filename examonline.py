@@ -378,14 +378,14 @@ with col1:
             for i, question in enumerate(st.session_state.mcq_questions):
                 st.subheader(f"MCQ Evaluation for Question {i + 1}:")
                 st.write(f"Question: {question['question']}")
-                st.write(f"Correct Answer: {question['answer']}")#comment this line if yu do not wish to show the correct response
-                st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")#comment this line if yu do not wish to show the correct response
+                #st.write(f"Correct Answer: {question['answer']}")#comment this line if yu do not wish to show the correct response
+                #st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")#comment this line if yu do not wish to show the correct response
                 st.write("-" * 20)#comment this line if yu do not wish to show the line -------------
             score = calculate_score(st.session_state.mcq_answers)
             total_questions = len(st.session_state.mcq_questions)
             percentage = (score / total_questions) * 100
             st.write(f"Your MCQ score is: {score}/{total_questions} ({percentage:.2f}%)")#comment this line if yu do not wish to show the correct response
-            st.write("-" * 20)#comment this line if yu do not wish to show the line -------------
+            st.write("-" * 20)#comment this line if you do not wish to show the line -------------
 
         st.subheader("Subjective Evaluations:")
         if st.session_state.subjective_questions:
@@ -395,7 +395,7 @@ with col1:
                 evaluation = st.session_state.subjective_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
                     st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show candidate response
-                    st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
+                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
@@ -408,7 +408,7 @@ with col1:
                 evaluation = st.session_state.code_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
                     st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show the candidate response
-                    st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
+                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
