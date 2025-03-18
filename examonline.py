@@ -201,7 +201,7 @@ def submit_test_results(mcq_score, subjective_evaluations, code_evaluations, ema
 
     try:
         response = requests.get(f"https://doskr.com/RESTAPI/udpatescore.php?email={email}&test_id={test_id}&mcq_score={mcq_score}&subjective_score={subjective_score}&coding_score={coding_score}")
-        st.write(response)
+        #st.write(response)
         response.raise_for_status()
         st.success("Test results submitted successfully!")
 
@@ -221,7 +221,7 @@ def camera_app():
     navigator.mediaDevices.getUserMedia({ video: true })
     .then(function(stream) {
         video.srcObject = stream;
-        document.body.appendChild(video); // Append to body so streamlit can see it.
+        document.body.appendChild(video);
     })
     .catch(function(error) {
         console.error('Error accessing camera:', error);
@@ -235,7 +235,7 @@ def camera_app():
 #     camera_app()
 
 st.title("AI-Powered MCQ, Subjective, and Coding Test")
-st.write("Click on Start Audio/Video recording first")
+st.write("Click on Start Video recording first")
 
 keywords = "Python"
 experience = "2 years"
@@ -277,24 +277,26 @@ if 'video_started' not in st.session_state:
 if 'questions_generated' not in st.session_state:
     st.session_state.questions_generated = False # Track if questions have been generated.
 
+
+
 col1, col2 = st.columns([3, 1])
 
 with col2:
     if not st.session_state.video_started:
-        if st.button("Start Camera"):
-            try:
-                camera_app()
-                st.session_state.video_started = True
-                st.rerun()
-            except Exception as e:
-                st.error(f"Error starting camera: {e}")
+        
+        try:
+            camera_app()
+            st.session_state.video_started = True
+            st.rerun()
+        except Exception as e:
+            st.error(f"Error starting camera: {e}")
     else:
         camera_app()
 
 with col1:
     if not st.session_state.exam_started and not st.session_state.evaluation_done:
-        st.write(f"Current keyword: {keywords}, Experience level: {experience}")
-        if st.button("Start All Tests"):
+        #st.write(f"Current keyword: {keywords}, Experience level: {experience}")
+        if st.button("Start Tests"):
             st.session_state.exam_started = True
             st.session_state.mcq_questions, st.session_state.code_questions, st.session_state.subjective_questions = question_Generate(keywords, experience)
             if not st.session_state.mcq_questions or not st.session_state.subjective_questions or not st.session_state.code_questions:
@@ -378,14 +380,14 @@ with col1:
             for i, question in enumerate(st.session_state.mcq_questions):
                 st.subheader(f"MCQ Evaluation for Question {i + 1}:")
                 st.write(f"Question: {question['question']}")
-                st.write(f"Correct Answer: {question['answer']}")
-                st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")
-                st.write("-" * 20)
+                #st.write(f"Correct Answer: {question['answer']}")#comment this line if yu do not wish to show the correct response
+                #st.write(f"Your Answer: {st.session_state.mcq_answers.get(str(i), 'Not Answered')}")#comment this line if yu do not wish to show the correct response
+                st.write("-" * 20)#comment this line if yu do not wish to show the line -------------
             score = calculate_score(st.session_state.mcq_answers)
             total_questions = len(st.session_state.mcq_questions)
             percentage = (score / total_questions) * 100
-            st.write(f"Your MCQ score is: {score}/{total_questions} ({percentage:.2f}%)")
-            st.write("-" * 20)
+            st.write(f"Your MCQ score is: {score}/{total_questions} ({percentage:.2f}%)")#comment this line if yu do not wish to show the correct response
+            st.write("-" * 20)#comment this line if you do not wish to show the line -------------
 
         st.subheader("Subjective Evaluations:")
         if st.session_state.subjective_questions:
@@ -394,8 +396,8 @@ with col1:
                 st.write(f"Question: {question['question']}")
                 evaluation = st.session_state.subjective_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
-                    st.write(f"Score: {evaluation['score']}%")
-                    st.write(f"Feedback: {evaluation['feedback']}")
+                    st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show candidate response
+                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
@@ -407,8 +409,8 @@ with col1:
                 st.write(f"Question: {question['question']}")
                 evaluation = st.session_state.code_evaluations.get(str(i))
                 if evaluation and 'score' in evaluation and 'feedback' in evaluation:
-                    st.write(f"Score: {evaluation['score']}%")
-                    st.write(f"Feedback: {evaluation['feedback']}")
+                    st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show the candidate response
+                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
                 else:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
