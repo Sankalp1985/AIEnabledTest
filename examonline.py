@@ -333,7 +333,7 @@ with col1:
                 st.write(question["question"])
                 student_answer = st.text_area(f"Your Answer (Question {i + 1})",
                                                 value=st.session_state.subjective_answers.get(str(i), ""),
-                                                key=f"subjective_answer_{i}")
+                                                key=f"subjective_answer_{i}", height=300)
                 st.session_state.subjective_answers[str(i)] = student_answer
 
         st.subheader("Coding Questions")
@@ -343,7 +343,7 @@ with col1:
                 st.write(question["question"])
                 student_code = st.text_area(f"Your Code (Question {i + 1})",
                                              value=st.session_state.code_answers.get(str(i), ""),
-                                             key=f"code_answer_{i}")
+                                             key=f"code_answer_{i}",height=300)
                 st.session_state.code_answers[str(i)] = student_code
 
         if st.button("Submit All Tests"):
