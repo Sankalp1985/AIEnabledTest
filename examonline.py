@@ -44,11 +44,12 @@ def question_Generate(keyword, experience):
     mcq_prompt = [("system", f"""You are an expert MCQ (Multiple Choice Question) generator for coding-related topics. Your task is to create five (5) high-quality MCQ questions based on the user's provided programming language and experience.
 
         **Constraints:**
+        * Generate as per years of experience- {experience}.
         * Each question must have exactly four (4) distinct options (A, B, C, D).
         * One and only one option must be the correct answer.
-        * The questions should be relevant to the programming language: '{keyword}' and experience level: '{experience}'.
+        * The questions should be relevant to the programming language: '{keyword}' and experience in years: '{experience}'.
         * The questions should focus on code snippets, outputs, or concepts related to the given language.
-        * The questions should be challenging but fair, suitable for someone with the specified experience.
+        * The questions should be challenging but fair, suitable for someone with the specified experience in years.
         * Avoid overly complex or ambiguous questions.
         * Format your response strictly as a JSON list of dictionaries.
         * Each dictionary must have the following keys: "question", "options" (a list of four strings), and "answer" (the correct answer string).
@@ -78,10 +79,11 @@ def question_Generate(keyword, experience):
         ("human", "")
         ]
 
-    code_prompt = f"""You are an expert programming *coding question generator*. Your task is to create two (2) coding questions tailored for a programmer with {experience} level experience in {keyword}.
+    code_prompt = f"""You are an expert programming *coding question generator*. Your task is to create two (2) coding questions tailored for a programmer with {experience} years experience in {keyword}.
 
         **Constraints:**
-        * Generate exactly 2 coding questions.
+        * Generate exactly 2 coding questions.        
+        * Generate as per years of experience- {experience}.
         * Each question should assess the programmer's understanding and practical skills in {keyword}.
         * Format your response strictly as a JSON list of dictionaries.
         * Each dictionary must contain the keys "question".
@@ -105,9 +107,10 @@ def question_Generate(keyword, experience):
 
         Generate the coding questions."""
 
-    sub_prompt = f"""You are an expert programming *theoretical question generator*. Your task is to create two (2) subjective theoretical programming questions tailored for a programmer with {experience} level experience in {keyword}.
+    sub_prompt = f"""You are an expert programming *theoretical question generator*. Your task is to create two (2) subjective theoretical programming questions tailored for a programmer with {experience} years experience in {keyword}.
 
         **Constraints:**
+        * Generate as per years of experience- {experience}.
         * Generate exactly 2 subjective theoretical programming questions.
         * Each question should be designed to assess the programmer's understanding and practical skills in {keyword}.
         * Format your response strictly as a JSON list of dictionaries.
