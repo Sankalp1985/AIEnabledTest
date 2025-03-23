@@ -243,6 +243,8 @@ st.write("Click on Start Video recording first")
 keywords = "Python"
 experience = "2 years"
 query_params = st.query_params
+
+TechRole_yes_no = query_params["TechRole"]
 if "keywords" in query_params:
     keywords = query_params["keywords"]
 if "experience" in query_params:
@@ -339,17 +341,18 @@ with col1:
                                                 key=f"subjective_answer_{i}", height=300)
                 st.session_state.subjective_answers[str(i)] = student_answer
 
-        st.subheader("Coding Questions")
-        if st.session_state.code_questions:
-            for i, question in enumerate(st.session_state.code_questions):
-                st.subheader(f"Coding Question {i + 1}:")
-                st.write(question["question"])
-                student_code = st.text_area(f"Your Code (Question {i + 1})",
-                                             value=st.session_state.code_answers.get(str(i), ""),
-                                             key=f"code_answer_{i}",height=300)
-                st.session_state.code_answers[str(i)] = student_code
+        if TechRole_yes_no == 'Tech_Yes':
+            st.subheader("Coding Questions")
+            if st.session_state.code_questions:
+                for i, question in enumerate(st.session_state.code_questions):
+                    st.subheader(f"Coding Question {i + 1}:")
+                    st.write(question["question"])
+                    student_code = st.text_area(f"Your Code (Question {i + 1})",
+                                                value=st.session_state.code_answers.get(str(i), ""),
+                                                key=f"code_answer_{i}",height=300)
+                    st.session_state.code_answers[str(i)] = student_code
 
-        if st.button("Submit All Tests"):
+        if st.button("Submit Tests"):
             if st.session_state.mcq_questions:
                 if None in st.session_state.mcq_answers.values():
                     st.warning("Please answer all MCQ questions before submitting.")
