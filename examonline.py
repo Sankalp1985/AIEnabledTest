@@ -203,7 +203,7 @@ def submit_test_results(mcq_score, subjective_evaluations, code_evaluations, ema
     coding_score= sum(eval.get('score', 0) for eval in code_evaluations.values()) / len(code_evaluations) if code_evaluations else 0
 
     try:
-        response = requests.get(f"https://doskr.com/RESTAPI/udpatescore.php?email={email}&test_id={test_id}&mcq_score={mcq_score}&subjective_score={subjective_score}&coding_score={coding_score}")
+        response = requests.get(f"https://doskr.com/RESTAPI/udpatescore.php?email={email}&test_id={test_id}&mcq_score={mcq_score}&subjective_score={subjective_score}&coding_score={coding_score}&techrole={TechRole_yes_no}")
         #st.write(response)
         response.raise_for_status()
         st.success("Test results submitted successfully!")
