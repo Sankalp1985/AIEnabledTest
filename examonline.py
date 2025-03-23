@@ -238,7 +238,7 @@ def camera_app():
 #     camera_app()
 
 st.title("AI-Powered MCQ, Subjective, and Coding Test")
-st.write("Click on Start Video recording first")
+#st.write("Click on Start Video recording first")
 
 keywords = "Python"
 experience = "2 years"
@@ -408,18 +408,19 @@ with col1:
                     st.write("Evaluation not available or invalid format.")
                 st.write("-" * 20)
 
-        st.subheader("Coding Evaluations:")
-        if st.session_state.code_questions:
-            for i, question in enumerate(st.session_state.code_questions):
-                st.subheader(f"Coding Evaluation for Question {i + 1}:")
-                st.write(f"Question: {question['question']}")
-                evaluation = st.session_state.code_evaluations.get(str(i))
-                if evaluation and 'score' in evaluation and 'feedback' in evaluation:
-                    st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show the candidate response
-                    #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
-                else:
-                    st.write("Evaluation not available or invalid format.")
-                st.write("-" * 20)
+        if TechRole_yes_no == 'Tech_Yes':
+            st.subheader("Coding Evaluations:")
+            if st.session_state.code_questions:
+                for i, question in enumerate(st.session_state.code_questions):
+                    st.subheader(f"Coding Evaluation for Question {i + 1}:")
+                    st.write(f"Question: {question['question']}")
+                    evaluation = st.session_state.code_evaluations.get(str(i))
+                    if evaluation and 'score' in evaluation and 'feedback' in evaluation:
+                        st.write(f"Score: {evaluation['score']}%")#comment this line if yu do not wish to show the candidate response
+                        #st.write(f"Feedback: {evaluation['feedback']}")#comment this line if yu do not wish to show the correct response
+                    else:
+                        st.write("Evaluation not available or invalid format.")
+                    st.write("-" * 20)
 
         email = query_params.get("email", None)
         test_id = query_params.get("test_id", None)
