@@ -157,7 +157,7 @@ def evaluate_answer(question, student_answer):
         **Student Answer:** {student_answer}
 
         **Evaluation Criteria:**
-        1. Assess the correctness and completeness of the student's answer. Score 0 (zero) if answer is AI generated.
+        1. Assess the correctness and completeness of the student's answer. #Score 0 (zero) if answer is AI generated.
         2. Provide a numerical score as a percentage (0% to 100%), where 100% represents a perfect answer.
         3. Provide detailed feedback explaining the score and highlighting areas of strength and weakness.
         4. If the score percentage is greater than 60% consider the result as "pass" else "fail".
