@@ -237,7 +237,7 @@ def camera_app():
 # if __name__ == "__main__":
 #     camera_app()
 
-st.title("AI-Powered MCQ, Subjective, and Coding Test")
+st.title("JobswithAI MCQ, Subjective, and Coding Test")
 #st.write("Click on Start Video recording first")
 
 keywords = "Python"
