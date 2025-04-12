@@ -14,6 +14,47 @@ genai.configure(api_key=GOOGLE_API_KEY)
 if not GOOGLE_API_KEY:
     st.error("Google API Key not found. Please check your .env file.")
 
+#Function to inject CSS and JavaScript to disable copy/paste and selection
+def disable_copy_paste():
+    css = """
+    <style>
+        body {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+ 
+    js = """
+    <script>
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+        // Optionally disable keyboard shortcuts for copy/paste (Ctrl+C, Ctrl+V)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+    """
+    components.html(js, height=0)
+
 def extract_qa(llm_response):
     try:
         if not llm_response or not llm_response.content.strip():
@@ -239,6 +280,9 @@ def camera_app():
 
 st.title("JobswithAI MCQ, Subjective, and Coding Test")
 #st.write("Click on Start Video recording first")
+
+#Inject CSS and JavaScript to disable copy/paste and selection
+disable_copy_paste()
 
 keywords = "Python"
 experience = "2 years"
