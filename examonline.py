@@ -80,7 +80,7 @@ def extract_qa(llm_response):
         return None
 
 def question_Generate(keyword, experience):
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.7)
 
     mcq_prompt = [("system", f"""You are an expert MCQ (Multiple Choice Question) generator for coding-related topics. Your task is to create five (5) high-quality MCQ questions based on the user's provided programming language and experience.
 
@@ -477,3 +477,4 @@ with col1:
                                  test_id)
         else:
             st.warning("Email and Test ID must be provided in the URL to submit results.")
+
