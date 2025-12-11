@@ -187,7 +187,7 @@ def question_Generate(keyword, experience):
     return mcq_data, code_data, sub_data
 
 def evaluate_answer(question, student_answer):
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
 
     if not student_answer.strip():
         return {"score": 0, "feedback": "Answer was blank or empty.", "result": "fail"}
@@ -477,4 +477,5 @@ with col1:
                                  test_id)
         else:
             st.warning("Email and Test ID must be provided in the URL to submit results.")
+
 
